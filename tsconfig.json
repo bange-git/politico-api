@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    },
+    // "ts-node": {
+    //   "compilerOptions": {
+    //     "module": "commonjs"
+    //   }
+    // }
+  },
+  "include": ["src/**/*", "src/**/*.ts"],
+  "exclude": ["./coverage", "./build", "__tests__", "jest.config.js"],
+}
