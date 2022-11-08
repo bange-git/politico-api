@@ -1,18 +1,18 @@
 import { Router, Request, Response } from 'express';
+import { deleteUser, getAllUsers, getUser, login, signUp, updateUser } from '../controllers/user.controller';
+
+const { User } = require('../app/db/models');
 
 const router = Router();
 
-interface User {
-  id: number;
-  firstname: string;
-  lastname: string;
-  othername?: string;
-  email: string;
-  phoneNumber: string;
-  passportUrl: string;
-  isAdmin: boolean;
-}
+router.get('/', getAllUsers);
+router.get('/:user_id', getUser);
+router.post('/signup', signUp);
+router.post('/login', login);
+router.put('/:user_id', updateUser);
+router.delete('/:user_id', deleteUser);
 
+/*
 const users: User[] = [
   {
     id: 1,
@@ -59,6 +59,7 @@ const users: User[] = [
 router.get('/', (req: Request, res: Response) => {
   res.send(users);
 });
+
 
 router.post('/create', (req: Request, res: Response) => {
   const newUser = req.body;
@@ -151,5 +152,5 @@ router.delete('/:user_id', (req: Request, res: Response) => {
     res.status(400).json({ status: res.statusCode, error: error });
   }
 });
-
+*/
 export { router };

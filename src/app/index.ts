@@ -5,6 +5,7 @@ import { OfficeRouter } from '../routes/officeRoute';
 import { CandidateRouter } from '../routes/candidateRoute';
 import { VoteRouter } from '../routes/voteRoute';
 import { PetitionRouter } from '../routes/petitionRoute';
+import { AuthRouter } from '../routes/authRoute';
 
 const app: Application = express();
 
@@ -17,6 +18,7 @@ app.use('/api/offices', OfficeRouter);
 app.use('/api/candidates', CandidateRouter);
 app.use('/api/votes', VoteRouter);
 app.use('/api/petitions', PetitionRouter);
+app.use('/api/auth', AuthRouter);
 
 app.use('/', (req: Request, res: Response): void => {
   res.json({ message: 'Allo! Catch-all route.' });
