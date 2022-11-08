@@ -17,6 +17,6 @@
     //   }
     // }
   },
-  "include": ["src/**/*", "src/**/*.ts"],
+  "include": ["src/**/*", "src/**/*.ts", "trash/office.ts"],
   "exclude": ["./coverage", "./build", "__tests__", "jest.config.js"],
 }
