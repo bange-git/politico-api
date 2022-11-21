@@ -1,4 +1,6 @@
 import { Router, Response, Request } from 'express';
+import { newPetition } from '../controllers/petition.controller';
+import auth from '../middlewares/auth';
 
 const PetitionRouter = Router();
 
@@ -48,15 +50,7 @@ PetitionRouter.get('/:petition_id', (req: Request, res: Response) => {
   }
 });
 
-PetitionRouter.post('/create', (req: Request, res: Response) => {
-  const newPetition = req.body;
-  petitions.push(newPetition);
-  try {
-    res.status(201).json({ status: res.statusCode, data: petitions });
-  } catch (error) {
-    res.status(400).json({ status: res.statusCode, error: error });
-  }
-});
+PetitionRouter.post('/create', auth, newPetition);
 
 PetitionRouter.delete('/:petition_id', (req: Request, res: Response) => {
   const id: string = req.params.petition_id;

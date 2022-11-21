@@ -5,15 +5,21 @@ import {
   newOffice,
   deleteOffice,
   updateOffice,
+  newCandidate
 } from '../controllers/office.controller';
 
 const OfficeRouter = Router();
+const OfficesRouter = Router();
 
 OfficeRouter.get('/', getAllOffices);
 OfficeRouter.get('/:office_id', getOffice);
 OfficeRouter.post('/create', newOffice);
+OfficeRouter.post('/:user_id/register', newCandidate);
 OfficeRouter.put('/:office_id', updateOffice);
 OfficeRouter.delete('/:office_id', deleteOffice);
+
+OfficesRouter.get('/', getAllOffices);
+
 
 //getAllOffices, getOffice, newOffice, deleteOffice, updateOffice
 
@@ -115,4 +121,4 @@ OfficeRouter.delete('/:office_id', deleteOffice);
 //   }
 // });
 
-export { OfficeRouter };
+export { OfficeRouter, OfficesRouter };

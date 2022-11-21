@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       officeId: {
         type: Sequelize.INTEGER,
@@ -15,6 +15,7 @@ module.exports = {
           model: 'Offices',
           key: 'id',
         },
+        primaryKey: true,
         allowNull: false,
         onDelete: 'CASCADE',
       },
@@ -24,6 +25,7 @@ module.exports = {
           model: 'Parties',
           key: 'id',
         },
+        primaryKey: true,
         allowNull: false,
         onDelete: 'CASCADE',
       },
@@ -33,20 +35,21 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        primaryKey: true,
         allowNull: false,
         onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Candidates');
-  }
+  },
 };

@@ -11,9 +11,10 @@ module.exports = (sequelize: Sequelize) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    // static associate(models) {
-    //   // define association here
-    // }
+    static associate(models: any) {
+      // define association here
+      Petition.belongsTo(models.User, { targetKey: 'id', foreignKey: 'createdBy' })
+    }
   }
   Petition.init({
     officeId: DataTypes.INTEGER,

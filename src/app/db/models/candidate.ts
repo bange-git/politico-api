@@ -9,9 +9,11 @@ module.exports = (sequelize: Sequelize) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    // static associate(models: any) {
-    //   // define association here
-    // }
+    static associate(models: any) {
+      Candidate.belongsTo(models.Office, { targetKey: 'id', foreignKey: 'officeId' })
+      Candidate.belongsTo(models.Party, { targetKey: 'id', foreignKey: 'partyId' })
+      Candidate.belongsTo(models.User, { targetKey: 'id', foreignKey: 'userId' })
+    }
   }
   Candidate.init(
     {

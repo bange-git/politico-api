@@ -1,8 +1,11 @@
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-const { Office } = require('../app/db/models');
+import models from '../app/db/models';
 import jwt from 'jsonwebtoken';
+import { ErrorHandler } from '../common/errors/ErrorHandler';
 require('dotenv').config();
+
+const { Candidate, Office } = models;
 
 const getAllOffices = async (
   req: Request,
@@ -27,6 +30,27 @@ const newOffice = async (req: Request, res: Response): Promise<Response> => {
     .json({ status: res.statusCode, data: [{ addOffice }] });
 };
 
+const newCandidate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<Response> => {
+  const id = req.params.user_id;
+  const { officeId, partyId } = req.body;
+
+  try {
+    const candidate = await Candidate.create({
+      officeId,
+      userId: id,
+      partyId,
+    });
+
+    return res.status(201).json({ status: res.statusCode, data: candidate });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteOffice = async (req: Request, res: Response) => {
   const id = req.params.office_id;
   const office = await Office.findOne({ where: { id } });
@@ -38,7 +62,11 @@ const deleteOffice = async (req: Request, res: Response) => {
     .json({ status: res.statusCode, message: 'office succesfully deleted' });
 };
 
-const updateOffice = async (req: Request, res: Response) => {
+const updateOffice = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const id = req.params.office_id;
   let office = await Office.findOne({ where: { id } });
   console.log(office);
@@ -52,13 +80,18 @@ const updateOffice = async (req: Request, res: Response) => {
 
       return res.status(201).json({ status: res.statusCode, data: [office] });
     } else {
-      return res
-        .status(404)
-        .json({ status: res.statusCode, error: 'Office not found' });
+      throw new ErrorHandler(res.statusCode, 'Office not found');
     }
   } catch (error) {
-    return res.status(400).json({ status: res.statusCode, error: error });
+    return next(error);
   }
 };
 
-export { getAllOffices, getOffice, newOffice, deleteOffice, updateOffice };
+export {
+  getAllOffices,
+  getOffice,
+  newOffice,
+  deleteOffice,
+  updateOffice,
+  newCandidate,
+};
