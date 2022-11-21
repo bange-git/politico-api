@@ -1,4 +1,3 @@
-
 import { Response, Request } from 'express';
 import bcrypt from 'bcrypt';
 const { User } = require('../app/db/models');
@@ -34,6 +33,15 @@ const login = async (req: Request, res: Response): Promise<Response> => {
         expiresIn: '1d',
       });
       console.log(token);
+      const decoded: typeof User = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      console.log(
+        'Decoded ==>',
+        decoded,
+        decoded.firstname,
+      );
+      //decoded.
+     // console.log('getting the id', decoded
+      //const { id, firstname } = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
       return res
         .status(200)
         .json({ status: res.statusCode, data: [{ token: token, user: user }] });

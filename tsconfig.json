@@ -11,12 +11,13 @@
     "paths": {
       "*": ["node_modules/*"]
     },
-    // "ts-node": {
-    //   "compilerOptions": {
-    //     "module": "commonjs"
-    //   }
-    // }
+    "typeRoots": ["./src/types/*", "./node_modules/@types"]
   },
-  "include": ["src/**/*", "src/**/*.ts", "trash/office.ts"],
-  "exclude": ["./coverage", "./build", "__tests__", "jest.config.js"],
+  "include": [
+    "src/**/*",
+    "src/**/*.ts",
+    "trash/office.ts",
+    "./src/types/*.d.ts"
+  ],
+  "exclude": ["./coverage", "./build", "__tests__", "jest.config.js"]
 }
