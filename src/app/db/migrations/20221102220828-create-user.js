@@ -26,11 +26,11 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM('voter', 'candidate', 'admin'),
-        allowNull: false,
-        defaultValue: 'voter'
-      },
+      // role: {
+      //   type: Sequelize.ENUM('voter', 'candidate', 'admin'),
+      //   allowNull: false,
+      //   defaultValue: 'voter'
+      // },
       password: {
         type: Sequelize.STRING,
         allowNull: true,

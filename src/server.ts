@@ -1,5 +1,5 @@
 import app from './app';
-const db = require('./app/db/models');
+import db from './app/db/models';
 
 const port = 8000;
 

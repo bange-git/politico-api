@@ -1,8 +1,11 @@
 import { Response, Request } from 'express';
 import bcrypt from 'bcrypt';
-const { User } = require('../app/db/models');
+//const { User } = require('../app/db/models');
+import db from '../app/db/models';
 import jwt from 'jsonwebtoken';
 require('dotenv').config();
+
+const { User } = db;
 
 const signUp = async (req: Request, res: Response): Promise<Response> => {
   const password: string = req.body.password;

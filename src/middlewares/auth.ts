@@ -2,7 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { ErrorHandler } from '../common/errors/ErrorHandler';
 import { decodeAccessToken } from '../utils/auth.utils';
 
-const { User } = require('../app/db/models');
+import db from '../app/db/models';
+
+const { User } = db;
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization.split(' ')[1]; // Bear token => ['Bearer', 'token']
@@ -17,6 +19,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     }
 
     req.user = user.toJSON();
+    //req.user  = JSON.stringify(user)
+    
     return next();
   } catch (error) {
     return next(error);
